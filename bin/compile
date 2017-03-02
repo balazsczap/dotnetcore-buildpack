@@ -36,18 +36,20 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
+CLIENT_DIST="\$HOME/dist"
+mkdir -p \$HOME/dist
+cp -n -r ${BUILD_DIR}/Client/dist ${CLIENT_DIST} 
+ls ${BUILD_DIR}
+APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsetting.json"`
+sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
+
 SRC_DIR=`mktemp -d`
 # Move the app source code into temporary src dir using subshell to not leak shopt
 (
 	shopt -s dotglob
 	mv ${BUILD_DIR}/* ${SRC_DIR}
 )
-CLIENT_DIST="\$HOME/dist"
-mkdir -p \$HOME/dist
-cp -n -r ${SRC_DIR}/Client/dist ${CLIENT_DIST} 
-ls ${SRC_DIR}
-APPSETTINGS=`find ${SRC_DIR} -maxdepth 10 -name "appsetting.json"`
-sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
+
 
 ls ${CLIENT_DIST}
 
