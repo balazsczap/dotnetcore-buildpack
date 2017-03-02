@@ -45,6 +45,7 @@ SRC_DIR=`mktemp -d`
 CLIENT_DIST="\$HOME/dist"
 mkdir -p \$HOME/dist
 cp -n -r ${SRC_DIR}/Client/dist ${CLIENT_DIST} 
+ls ${SRC_DIR}
 APPSETTINGS=`find ${SRC_DIR} -maxdepth 10 -name "appsetting.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
 
