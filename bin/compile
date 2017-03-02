@@ -36,21 +36,21 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
+CLIENT_DIST=/app/heroku_output/dist
+APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
+sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
+
+#find ${BUILD_DIR} -maxdepth 10 
+#cat ${APPSETTINGS}
+
+
 SRC_DIR=`mktemp -d`
 # Move the app source code into temporary src dir using subshell to not leak shopt
 (
 	shopt -s dotglob
 	mv ${BUILD_DIR}/* ${SRC_DIR}
 )
-CLIENT_DIST="\$HOME/dist"
-mkdir -p \$HOME/dist
-cp -n -r ${SRC_DIR}/Client/dist ${CLIENT_DIST} 
-APPSETTINGS=`find ${SRC_DIR} -maxdepth 10 -name "appsetting.json"`
-sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
 
-ls ${CLIENT_DIST}
-
-exit 1
 
 mkdir -p ${CACHE_DIR}
 
@@ -159,6 +159,8 @@ export ASPNETCORE_BASEPATH=${SRC_DIR}
 env | grep ASPNETCORE_BASEPATH
 dotnet publish ${PROJECT_JSON_FILE} --output ${BUILD_DIR}/heroku_output --configuration ${CORE_CONFIGURATION}
 
+cp -n -r ${SRC_DIR}/Client/dist/ ${BUILD_DIR}/heroku_output/dist/
+
 echo "Publish Successed"
 
 mkdir -p ${BUILD_DIR}/.profile.d
@@ -167,10 +169,11 @@ cp -n ${BUILDPACK_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
 
 
 
+
 if [ -e ${SRC_DIR}/Procfile ]; then
 	cp ${SRC_DIR}/Procfile ${BUILD_DIR}
 else
 	cat << EOT >> ${BUILD_DIR}/Procfile
-web: cd \$HOME/heroku_output && dotnet ./${PROJECT_NAME}.dll --server.urls http://+:\$PORT ${CORE_ENVIRONMENT}
+web: cd \$HOME/heroku_output && find . -type d -exec readlink -f {} \; && dotnet ./${PROJECT_NAME}.dll --server.urls http://+:\$PORT ${CORE_ENVIRONMENT}
 EOT
 fi
