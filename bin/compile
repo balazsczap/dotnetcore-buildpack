@@ -36,14 +36,13 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
-CLIENT_DIST=${BUILD_DIR}/dist
+CLIENT_DIST=${BUILD_DIR}/Client/dist
 mkdir -p \$HOME/dist
-cp -n -r ${BUILD_DIR}/Client/dist ${CLIENT_DIST} 
 APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
 
 find ${BUILD_DIR} -maxdepth 10 
-
+cat ${APPSETTINGS}
 exit 1
 SRC_DIR=`mktemp -d`
 # Move the app source code into temporary src dir using subshell to not leak shopt
