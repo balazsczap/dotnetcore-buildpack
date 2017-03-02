@@ -36,7 +36,7 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
-CLIENT_DIST=${BUILD_DIR}/Client/dist
+CLIENT_DIST=/app/Client/dist
 mkdir -p \$HOME/dist
 APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
