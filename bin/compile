@@ -41,9 +41,9 @@ mkdir -p \$HOME/dist
 APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
 
-find ${BUILD_DIR} -maxdepth 10 
-cat ${APPSETTINGS}
-exit 1
+#find ${BUILD_DIR} -maxdepth 10 
+#cat ${APPSETTINGS}
+
 SRC_DIR=`mktemp -d`
 # Move the app source code into temporary src dir using subshell to not leak shopt
 (
