@@ -50,8 +50,7 @@ SRC_DIR=`mktemp -d`
 	shopt -s dotglob
 	mv ${BUILD_DIR}/* ${SRC_DIR}
 )
-find ${SRC_DIR} -maxdepth 10
-exit 1
+
 
 mkdir -p ${CACHE_DIR}
 
@@ -160,7 +159,7 @@ export ASPNETCORE_BASEPATH=${SRC_DIR}
 env | grep ASPNETCORE_BASEPATH
 dotnet publish ${PROJECT_JSON_FILE} --output ${BUILD_DIR}/heroku_output --configuration ${CORE_CONFIGURATION
 
-cp -r ${SRC_DIR}/Client/dist ${BUILD_DIR}/dist
+cp -n -r ${SRC_DIR}/Client/dist ${BUILD_DIR}/heroku_output/dist
 
 echo "Publish Successed"
 
