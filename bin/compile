@@ -159,7 +159,7 @@ export ASPNETCORE_BASEPATH=${SRC_DIR}
 env | grep ASPNETCORE_BASEPATH
 dotnet publish ${PROJECT_JSON_FILE} --output ${BUILD_DIR}/heroku_output --configuration ${CORE_CONFIGURATION
 
-cp -n -r ${SRC_DIR}/Client/dist ${BUILD_DIR}/heroku_output/dist
+cp -n -r ${SRC_DIR}/Client/dist/ ${BUILD_DIR}/heroku_output/dist
 
 echo "Publish Successed"
 
