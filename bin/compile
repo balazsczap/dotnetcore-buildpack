@@ -36,7 +36,7 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
-CLIENT_DIST=/app/dist
+CLIENT_DIST=/app/heroku_output/dist
 APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
 
