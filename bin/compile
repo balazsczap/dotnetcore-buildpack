@@ -40,7 +40,7 @@ CLIENT_DIST="\$HOME/dist"
 mkdir -p \$HOME/dist
 cp -n -r ${BUILD_DIR}/Client/dist ${CLIENT_DIST} 
 ls ${BUILD_DIR}
-APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsetting.json"`
+APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
 
 SRC_DIR=`mktemp -d`
