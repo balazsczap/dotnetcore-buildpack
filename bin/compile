@@ -36,7 +36,7 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
-CLIENT_DIST="/app/heroku_output/dist"
+CLIENT_DIST=${BUILD_DIR}/dist
 mkdir -p \$HOME/dist
 cp -n -r ${BUILD_DIR}/Client/dist ${CLIENT_DIST} 
 ls ${BUILD_DIR}
