@@ -70,13 +70,13 @@ then
 	fi
 fi
 
-echo Build Dir:
-find ${BUILD_DIR} -maxdepth 10 
 
-echo Src dir:
-find ${SRC_DIR}
 
 npm install -g @angular/cli@1.0.0-beta.32.3
+
+cd ${SRC_DIR}/Client
+npm install
+find
 
 exit 1
 
