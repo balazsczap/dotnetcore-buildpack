@@ -70,7 +70,11 @@ then
 	fi
 fi
 
+echo Build Dir:
 find ${BUILD_DIR} -maxdepth 10 
+
+echo Src dir:
+find ${SRC_DIR}
 
 exit 1
 
