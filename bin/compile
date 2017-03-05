@@ -76,8 +76,9 @@ npm install -g @angular/cli@1.0.0-beta.32.3
 
 cd ${SRC_DIR}/Client
 npm install
-find
-
+rmdir dist
+ng build
+ls ${SRC_DIR}/Client/dist/
 exit 1
 
 # Install .NET Core
