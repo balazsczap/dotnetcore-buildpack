@@ -36,6 +36,7 @@ else
 	CORE_ENVIRONMENT=""
 fi
 
+# Overwrite the client build path in the appsettings file
 CLIENT_DIST=/app/heroku_output/dist
 APPSETTINGS=`find ${BUILD_DIR} -maxdepth 10 -name "appsettings.json"`
 sed -i -e "s|\"ClientBuildPath\": \"\(.*\)\"|\"ClientBuildPath\": \"${CLIENT_DIST}\"|" ${APPSETTINGS}
@@ -68,6 +69,10 @@ then
 		npm install -g bower
 	fi
 fi
+
+find ${BUILD_DIR} -maxdepth 10 
+
+exit 1
 
 # Install .NET Core
 echo "Get .NET Core Version and Channel from the PROJECT"
