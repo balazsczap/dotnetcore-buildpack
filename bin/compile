@@ -71,14 +71,15 @@ then
 fi
 
 
-
+echo "Installing angular-cli..."
 npm install -g @angular/cli@1.0.0-beta.32.3
 
+echo "Installing node modules..."
 cd ${SRC_DIR}/Client
 npm install
+
+echo "Building angular2 app..."
 ng build
-ls ${SRC_DIR}/Client/dist/
-exit 1
 
 # Install .NET Core
 echo "Get .NET Core Version and Channel from the PROJECT"
